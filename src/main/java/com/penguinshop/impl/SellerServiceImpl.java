@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.penguinshop.config.JwtProvider;
 import com.penguinshop.domain.ACCOUNT_STATUS;
 import com.penguinshop.domain.USER_ROLE;
+import com.penguinshop.exceptions.SellerException;
 import com.penguinshop.model.Address;
 import com.penguinshop.model.BankDetails;
 import com.penguinshop.model.BusinessDetails;
@@ -63,10 +64,10 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
-    public Seller getSellerById(Long id) throws Exception {
+    public Seller getSellerById(Long id) throws SellerException {
         // Must use orElseThrow as seller repo returns an Optional (a seller or an empty Optional)
         return sellerRepository.findById(id)
-                .orElseThrow(() -> new Exception("Seller not found with ID - " + id));
+                .orElseThrow(() -> new SellerException("Seller not found with ID - " + id));
     }
 
     @Override

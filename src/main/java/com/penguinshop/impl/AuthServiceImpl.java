@@ -1,4 +1,4 @@
-package com.penguinshop.service.impl;
+package com.penguinshop.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -189,7 +189,8 @@ public class AuthServiceImpl implements AuthService {
         }
 
         // As OTP is valid, delete it from database so it can only be used once
-        verificationCodeRepository.delete(verificationCode);
+        otpService.consumeOtp(verificationCode);
+        // verificationCodeRepository.delete(verificationCode);
 
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }

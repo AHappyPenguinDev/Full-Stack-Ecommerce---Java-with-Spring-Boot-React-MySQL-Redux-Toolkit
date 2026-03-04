@@ -43,4 +43,9 @@ public class OtpServiceImpl implements OtpService {
         System.out.println(otp);
         return otp.toString();
     }
+
+	@Override
+	public void consumeOtp(VerificationCode verificationCode) {
+        verificationCodeRepository.delete(verificationCode);
+	}
 }
