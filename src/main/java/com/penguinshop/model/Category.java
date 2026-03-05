@@ -41,6 +41,7 @@ public class Category {
      -- Level 2: Top wear, bottom wear, party wear<br>
      -- Level 3: Shirt, kurta, trouser (Men category)<br>
      */
+    
     @NotNull
     private Integer level;
 

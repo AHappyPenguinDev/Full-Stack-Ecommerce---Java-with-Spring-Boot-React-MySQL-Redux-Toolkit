@@ -1,4 +1,4 @@
-package com.penguinshop.exception;
+package com.penguinshop.exceptions;
 
 import java.time.LocalDateTime;
 

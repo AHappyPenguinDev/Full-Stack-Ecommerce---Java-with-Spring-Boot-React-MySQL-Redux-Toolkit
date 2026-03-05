@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
-import com.penguinshop.exception.ErrorDetails;
+import com.penguinshop.exceptions.ErrorDetails;
 
 @ControllerAdvice
 public class GlobalException{
