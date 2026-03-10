@@ -40,7 +40,7 @@ public class Product {
 
     private int numRatings;
 
-    @ManyToOne // Many category have many products
+    @ManyToOne // Many categories have many products
     private Category category;
 
     @ManyToOne // Many sellers have many products

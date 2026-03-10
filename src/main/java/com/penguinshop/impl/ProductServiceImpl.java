@@ -90,7 +90,7 @@ public class ProductServiceImpl implements ProductService {
             category.setCategoryId(req.getCategory3());
             category.setLevel(3); // level 3 category
             category.setParentCategory(category2); // parent = level 2 category
-            category2 = categoryRepository.save(category);
+            category3 = categoryRepository.save(category);
         }
 
         // Calculate discount percentage between MRP and selling price
@@ -121,10 +121,14 @@ public class ProductServiceImpl implements ProductService {
         product.setSellingPrice(req.getSellingPrice());
 
         // Set product images
-        product.setImages(req.getImage_urls());
+        product.setImages(req.getImages());
 
         // Set MRP (original price)
         product.setMrpPrice(req.getMrpPrice());
+
+        product.setQuantity(req.getQuantity());
+
+        product.setNumRatings(req.getNumRatings());
 
         // Set available sizes
         product.setSizes(req.getSizes());
@@ -171,7 +175,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product updateProduct(Long productId, Product product) throws ProductException {
 
-        // Ensure the product exists
+        // Ensure the product exists, if not the method throws a Product Exception
         findProductById(productId);
 
         // Set ID to ensure correct product is updated
@@ -207,7 +211,7 @@ public class ProductServiceImpl implements ProductService {
     public Page<Product> getAllProducts(
             String category,
             String brand,
-            String colors,
+            String color,
             String sizes,
             Integer minPrice,
             Integer maxPrice,
@@ -232,9 +236,9 @@ public class ProductServiceImpl implements ProductService {
                 predicates.add(criteriaBuilder.equal(categoryJoin.get("categoryId"), category));
             }
 
-            // Filter by colors (NOTE: logic may be incorrect here)
-            if (category != null && !colors.isEmpty()) {
-                predicates.add(criteriaBuilder.equal(root.get("categoryId"), colors));
+            // Filter by colors 
+            if (color != null && !color.isEmpty()) {
+                predicates.add(criteriaBuilder.equal(root.get("color"), color));
             }
 
             // Filter by size
@@ -254,7 +258,7 @@ public class ProductServiceImpl implements ProductService {
 
             // Filter by minimum discount
             if (minDiscount != null) {
-                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("discountPercentage"), minDiscount));
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("discountPercent"), minDiscount));
             }
 
             // Filter by stock availability

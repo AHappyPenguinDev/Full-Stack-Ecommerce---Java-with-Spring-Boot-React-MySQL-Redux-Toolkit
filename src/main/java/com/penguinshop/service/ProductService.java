@@ -19,7 +19,7 @@ public interface ProductService {
     public Product findProductById(Long productId) throws ProductException;
 
     // Arguments are filters which the user can filter by
-    public Page<Product> getAllProducts(String category, String brand, String colors, String sizes, Integer minPrice,
+    public Page<Product> getAllProducts(String category, String brand, String color, String sizes, Integer minPrice,
             Integer maxPrice, Integer minDiscount, String sort, String stock, Integer pageNumber);
 
     // Retrieve all products associated with a seller so they can be display in the seller dashboard

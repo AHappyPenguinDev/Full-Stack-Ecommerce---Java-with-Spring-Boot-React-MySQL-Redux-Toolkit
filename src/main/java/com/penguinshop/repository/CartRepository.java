@@ -11,5 +11,5 @@ import com.penguinshop.model.Cart;
 
 // When a new user is created a new cart must be assigned
 public interface CartRepository extends JpaRepository<Cart, Long>{
-
+    Cart findByUserId(Long id);
 }
