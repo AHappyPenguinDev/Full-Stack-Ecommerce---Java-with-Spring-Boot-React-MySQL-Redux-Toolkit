@@ -20,12 +20,14 @@ import com.penguinshop.domain.ACCOUNT_STATUS;
 import com.penguinshop.impl.OtpServiceImpl;
 import com.penguinshop.model.LoginRequest;
 import com.penguinshop.model.Seller;
+import com.penguinshop.model.SellerReport;
 import com.penguinshop.model.VerificationCode;
 import com.penguinshop.repository.VerificationCodeRepository;
 import com.penguinshop.response.AuthResponse;
 import com.penguinshop.service.AuthService;
 import com.penguinshop.service.EmailService;
 import com.penguinshop.service.OtpService;
+import com.penguinshop.service.SellerReportService;
 import com.penguinshop.service.SellerService;
 import com.penguinshop.utils.OtpUtil;
 
@@ -42,6 +44,7 @@ public class SellerController {
     private final EmailService emailService;
     private final VerificationCodeRepository verificationCodeRepository;
     private final OtpService otpService;
+    private final SellerReportService sellerReportService;
 
     @PostMapping("/send/login-otp")
     public ResponseEntity<AuthResponse> loginSeller(@RequestBody LoginRequest req) throws Exception {
@@ -94,6 +97,14 @@ public class SellerController {
     public ResponseEntity<Seller> getSellerByJwt(@RequestHeader("Authorization") String jwt) throws Exception {
         Seller seller = sellerService.getSellerProfile(jwt);
         return ResponseEntity.ok(seller);
+    }
+
+    @GetMapping("/report")
+    public ResponseEntity<SellerReport> getSellerReport(
+            @RequestHeader("Authorization") String jwt) throws Exception {
+        Seller seller = sellerService.getSellerProfile(jwt);
+        SellerReport report = sellerReportService.getSellerReport(seller);
+        return new ResponseEntity<>(report, HttpStatus.OK);
     }
 
     @GetMapping

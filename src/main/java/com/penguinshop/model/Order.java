@@ -52,13 +52,13 @@ public class Order {
 
     private double totalMrpPrice;
 
-    private Integer totalSellingPrice;
+    private Long totalSellingPrice;
 
     private Integer discount;
 
     private ORDER_STATUS orderStatus;
 
-    private int totalItem;
+    private int totalItems;
 
     private PAYMENT_STATUS paymentStatus = PAYMENT_STATUS.PENDING;
 

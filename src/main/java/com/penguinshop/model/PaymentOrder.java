@@ -25,7 +25,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @EqualsAndHashCode
 
-// If order are from different brands need to create different payment orders
+// If orders are from different brands need to create different payment orders
 public class PaymentOrder{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

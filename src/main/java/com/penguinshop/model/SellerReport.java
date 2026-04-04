@@ -36,6 +36,8 @@ public class SellerReport {
 
     private Integer totalOrders = 0;
 
+    private Integer totalSales = 0;
+
     private Integer canceledOrders = 0;
 
     private Integer totalTransactions = 0;
