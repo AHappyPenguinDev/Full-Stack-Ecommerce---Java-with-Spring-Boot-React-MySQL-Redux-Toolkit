@@ -26,7 +26,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,7 +35,7 @@ public class Review {
     private String reviewText;
 
     @NotNull
-    private String rating;
+    private int rating;
 
     @ElementCollection
     private List<String> productImages;

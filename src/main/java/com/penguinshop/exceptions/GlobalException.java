@@ -31,5 +31,13 @@ public class GlobalException{
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
         
     }
+
+    public ResponseEntity<ErrorDetails> reviewExceptionHandler(ReviewException re, WebRequest req) {
+        ErrorDetails errorDetails = new ErrorDetails();
+        errorDetails.setError(re.getMessage());           
+        errorDetails.setDetails(req.getDescription(false));
+        errorDetails.setTimestamp(LocalDateTime.now());
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST) ;
+    }
     
 }

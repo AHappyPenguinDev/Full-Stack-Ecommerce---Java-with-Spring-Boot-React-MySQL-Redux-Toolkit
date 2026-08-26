@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,10 +27,13 @@ public class Transaction{
     private Long id;
 
     @ManyToOne
-    private User costumer;
+    private User customer;
 
     @ManyToOne
     private Seller seller;
+
+    @OneToOne
+    private Order order;
     
     private LocalDateTime date = LocalDateTime.now();
 

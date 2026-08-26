@@ -19,6 +19,7 @@ import com.penguinshop.response.PaymentLinkResponse;
 import com.penguinshop.service.PaymentService;
 import com.penguinshop.service.SellerReportService;
 import com.penguinshop.service.SellerService;
+import com.penguinshop.service.TransactionService;
 import com.penguinshop.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,7 @@ public class PaymentController {
     private final UserService userService;
     private final SellerService sellerService;
     private final SellerReportService sellerReportService;
+    private final TransactionService transactionService;
 
     @GetMapping("/{paymentId}")
     public ResponseEntity<ApiResponse> paymentSuccessHandler(
@@ -47,6 +49,7 @@ public class PaymentController {
 
         if(isPaymentSuccessful) {
             for(Order order : paymentOrder.getOrders()) {
+                transactionService.createTransaction(order);
                 Seller seller = sellerService.getSellerById(order.getSellerId());
                 SellerReport sellerReport = sellerReportService.getSellerReport(seller);
                 sellerReport.setTotalOrders(sellerReport.getTotalOrders() + 1);
@@ -58,6 +61,6 @@ public class PaymentController {
         ApiResponse res = new ApiResponse();
         res.setMessage("Payment successful");
 
-        return new ResponseEntity<>(res, HttpStatus.CREATED)
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 }
